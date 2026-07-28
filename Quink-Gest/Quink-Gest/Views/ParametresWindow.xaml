@@ -1,0 +1,49 @@
+<Window x:Class="QuinkGest.Views.ParametresWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Paramètres" Height="620" Width="720"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Informations du commerce" Grid.Row="0" Padding="8" Margin="0,0,0,12">
+            <WrapPanel>
+                <TextBox x:Name="ChampNomCommerce" Width="180" Margin="4" Tag="Nom du commerce"/>
+                <TextBox x:Name="ChampAdresse" Width="180" Margin="4" Tag="Adresse"/>
+                <TextBox x:Name="ChampTelephone" Width="130" Margin="4" Tag="Téléphone"/>
+                <TextBox x:Name="ChampDevise" Width="60" Margin="4" Tag="Devise"/>
+                <Button x:Name="BoutonEnregistrerParametres" Content="Enregistrer" Margin="4" Padding="8,4"
+                        Click="BoutonEnregistrerParametres_Click"/>
+            </WrapPanel>
+        </GroupBox>
+
+        <GroupBox Header="Nouvel utilisateur" Grid.Row="1" Padding="8" Margin="0,0,0,12">
+            <WrapPanel>
+                <TextBox x:Name="ChampNomUtilisateur" Width="130" Margin="4" Tag="Nom d'utilisateur"/>
+                <TextBox x:Name="ChampMotDePasse" Width="130" Margin="4" Tag="Mot de passe"/>
+                <TextBox x:Name="ChampNomComplet" Width="150" Margin="4" Tag="Nom complet"/>
+                <ComboBox x:Name="ChampRole" Width="100" Margin="4">
+                    <ComboBoxItem Content="vendeur" IsSelected="True"/>
+                    <ComboBoxItem Content="gerant"/>
+                </ComboBox>
+                <Button x:Name="BoutonCreerUtilisateur" Content="Créer" Margin="4" Padding="8,4"
+                        Click="BoutonCreerUtilisateur_Click"/>
+                <Button x:Name="BoutonSupprimerUtilisateur" Content="Supprimer" Margin="4" Padding="8,4"
+                        IsEnabled="False" Click="BoutonSupprimerUtilisateur_Click"/>
+            </WrapPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="GrilleUtilisateurs" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionChanged="GrilleUtilisateurs_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom d'utilisateur" Binding="{Binding NomUtilisateur}" Width="150"/>
+                <DataGridTextColumn Header="Nom complet" Binding="{Binding NomComplet}" Width="200"/>
+                <DataGridTextColumn Header="Rôle" Binding="{Binding Role}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

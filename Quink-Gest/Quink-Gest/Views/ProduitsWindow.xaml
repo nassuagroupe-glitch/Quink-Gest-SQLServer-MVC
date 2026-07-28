@@ -1,0 +1,58 @@
+<Window x:Class="QuinkGest.Views.ProduitsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Produits &amp; Stock" Height="620" Width="950"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox x:Name="GroupeFormulaire" Header="Nouveau produit" Grid.Row="0" Padding="8" Margin="0,0,0,8">
+            <WrapPanel>
+                <TextBox x:Name="ChampNom" Width="140" Margin="4" Tag="Nom"/>
+                <TextBox x:Name="ChampReference" Width="100" Margin="4" Tag="Référence"/>
+                <TextBox x:Name="ChampCategorie" Width="120" Margin="4" Tag="Catégorie"/>
+                <ComboBox x:Name="ChampUnite" Width="90" Margin="4">
+                    <ComboBoxItem Content="piece" IsSelected="True"/>
+                    <ComboBoxItem Content="metre"/>
+                    <ComboBoxItem Content="kg"/>
+                    <ComboBoxItem Content="litre"/>
+                    <ComboBoxItem Content="sachet"/>
+                </ComboBox>
+                <TextBox x:Name="ChampPrixAchat" Width="90" Margin="4" Tag="Prix achat"/>
+                <TextBox x:Name="ChampPrixVente" Width="90" Margin="4" Tag="Prix vente"/>
+                <TextBox x:Name="ChampStockInitial" Width="90" Margin="4" Tag="Stock initial"/>
+                <TextBox x:Name="ChampSeuilAlerte" Width="90" Margin="4" Tag="Seuil alerte"/>
+                <Button x:Name="BoutonAjouter" Content="Ajouter" Margin="4" Padding="8,4" Click="BoutonAjouter_Click"/>
+                <Button x:Name="BoutonModifier" Content="Modifier" Margin="4" Padding="8,4" IsEnabled="False" Click="BoutonModifier_Click"/>
+                <Button x:Name="BoutonSupprimer" Content="Supprimer" Margin="4" Padding="8,4" IsEnabled="False" Click="BoutonSupprimer_Click"/>
+                <Button x:Name="BoutonNouveau" Content="Nouveau" Margin="4" Padding="8,4" IsEnabled="False" Click="BoutonNouveau_Click"/>
+            </WrapPanel>
+        </GroupBox>
+
+        <GroupBox Header="Réapprovisionner" Grid.Row="1" Padding="8" Margin="0,0,0,8">
+            <WrapPanel>
+                <ComboBox x:Name="ChampProduitReappro" Width="180" Margin="4" DisplayMemberPath="Nom"/>
+                <ComboBox x:Name="ChampFournisseurReappro" Width="160" Margin="4" DisplayMemberPath="Nom"/>
+                <TextBox x:Name="ChampQuantiteReappro" Width="100" Margin="4" Tag="Quantité reçue"/>
+                <Button x:Name="BoutonReapprovisionner" Content="Réapprovisionner" Margin="4" Padding="8,4"
+                        Click="BoutonReapprovisionner_Click"/>
+            </WrapPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="GrilleProduits" Grid.Row="2" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionChanged="GrilleProduits_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="160"/>
+                <DataGridTextColumn Header="Catégorie" Binding="{Binding Categorie}" Width="120"/>
+                <DataGridTextColumn Header="Unité" Binding="{Binding Unite}" Width="70"/>
+                <DataGridTextColumn Header="Prix vente" Binding="{Binding PrixVente}" Width="90"/>
+                <DataGridTextColumn Header="Stock" Binding="{Binding QuantiteStock}" Width="80"/>
+                <DataGridTextColumn Header="Seuil" Binding="{Binding SeuilAlerte}" Width="70"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

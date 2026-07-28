@@ -1,0 +1,31 @@
+<Window x:Class="QuinkGest.Views.FournisseursWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Fournisseurs" Height="500" Width="650"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Nouveau fournisseur" Grid.Row="0" Padding="8" Margin="0,0,0,12">
+            <WrapPanel>
+                <TextBox x:Name="ChampNom" Width="150" Margin="4" Tag="Nom"/>
+                <TextBox x:Name="ChampTelephone" Width="130" Margin="4" Tag="Téléphone"/>
+                <TextBox x:Name="ChampAdresse" Width="150" Margin="4" Tag="Adresse"/>
+                <TextBox x:Name="ChampContact" Width="130" Margin="4" Tag="Personne à contacter"/>
+                <Button x:Name="BoutonAjouter" Content="Ajouter" Margin="4" Padding="8,4" Click="BoutonAjouter_Click"/>
+            </WrapPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="GrilleFournisseurs" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="150"/>
+                <DataGridTextColumn Header="Téléphone" Binding="{Binding Telephone}" Width="130"/>
+                <DataGridTextColumn Header="Adresse" Binding="{Binding Adresse}" Width="150"/>
+                <DataGridTextColumn Header="Contact" Binding="{Binding Contact}" Width="130"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

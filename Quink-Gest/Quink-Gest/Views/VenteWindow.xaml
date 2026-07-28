@@ -1,0 +1,46 @@
+<Window x:Class="QuinkGest.Views.VenteWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Nouvelle vente" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Ajouter un produit au panier" Grid.Row="0" Padding="8" Margin="0,0,0,8">
+            <WrapPanel>
+                <ComboBox x:Name="ChampProduit" Width="220" Margin="4" DisplayMemberPath="Nom"/>
+                <TextBox x:Name="ChampQuantite" Width="90" Margin="4" Tag="Quantité"/>
+                <Button x:Name="BoutonAjouterPanier" Content="Ajouter au panier" Margin="4" Padding="8,4"
+                        Click="BoutonAjouterPanier_Click"/>
+            </WrapPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="GrillePanier" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Produit" Binding="{Binding NomProduit}" Width="200"/>
+                <DataGridTextColumn Header="Unité" Binding="{Binding Unite}" Width="80"/>
+                <DataGridTextColumn Header="Quantité" Binding="{Binding Quantite}" Width="90"/>
+                <DataGridTextColumn Header="Prix unitaire" Binding="{Binding PrixUnitaire}" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Margin="0,12,0,0">
+            <TextBlock x:Name="TexteTotal" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
+
+            <WrapPanel>
+                <TextBox x:Name="ChampClientNom" Width="180" Margin="4" Tag="Nom du client (optionnel)"/>
+                <ComboBox x:Name="ChampModePaiement" Width="140" Margin="4">
+                    <ComboBoxItem Content="Espèces" IsSelected="True"/>
+                    <ComboBoxItem Content="Mobile Money"/>
+                    <ComboBoxItem Content="Chèque"/>
+                </ComboBox>
+                <Button x:Name="BoutonValider" Content="Valider la vente" Margin="4" Padding="8,4"
+                        Click="BoutonValider_Click"/>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</Window>

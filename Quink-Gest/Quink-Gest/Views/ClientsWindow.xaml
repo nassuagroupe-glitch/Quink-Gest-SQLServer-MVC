@@ -1,0 +1,35 @@
+<Window x:Class="QuinkGest.Views.ClientsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Clients" Height="500" Width="700"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox x:Name="GroupeFormulaire" Header="Nouveau client" Grid.Row="0" Padding="8" Margin="0,0,0,12">
+            <WrapPanel>
+                <TextBox x:Name="ChampNom" Width="150" Margin="4" Tag="Nom"/>
+                <TextBox x:Name="ChampTelephone" Width="130" Margin="4" Tag="Téléphone"/>
+                <TextBox x:Name="ChampAdresse" Width="150" Margin="4" Tag="Adresse"/>
+                <TextBox x:Name="ChampEmail" Width="150" Margin="4" Tag="Email"/>
+                <Button x:Name="BoutonAjouter" Content="Ajouter" Margin="4" Padding="8,4" Click="BoutonAjouter_Click"/>
+                <Button x:Name="BoutonModifier" Content="Modifier" Margin="4" Padding="8,4" IsEnabled="False" Click="BoutonModifier_Click"/>
+                <Button x:Name="BoutonSupprimer" Content="Supprimer" Margin="4" Padding="8,4" IsEnabled="False" Click="BoutonSupprimer_Click"/>
+                <Button x:Name="BoutonNouveau" Content="Nouveau" Margin="4" Padding="8,4" IsEnabled="False" Click="BoutonNouveau_Click"/>
+            </WrapPanel>
+        </GroupBox>
+
+        <DataGrid x:Name="GrilleClients" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionChanged="GrilleClients_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nom" Binding="{Binding Nom}" Width="150"/>
+                <DataGridTextColumn Header="Téléphone" Binding="{Binding Telephone}" Width="130"/>
+                <DataGridTextColumn Header="Adresse" Binding="{Binding Adresse}" Width="150"/>
+                <DataGridTextColumn Header="Email" Binding="{Binding Email}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

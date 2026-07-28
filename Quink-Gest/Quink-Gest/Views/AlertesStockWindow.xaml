@@ -1,0 +1,24 @@
+<Window x:Class="QuinkGest.Views.AlertesStockWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Alertes de stock" Height="450" Width="600"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Produits dont le stock est au niveau ou en dessous du seuil d'alerte :"
+                   Margin="0,0,0,12" FontWeight="Bold"/>
+
+        <DataGrid x:Name="GrilleAlertes" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Produit" Binding="{Binding Nom}" Width="200"/>
+                <DataGridTextColumn Header="Stock actuel" Binding="{Binding QuantiteStock}" Width="120"/>
+                <DataGridTextColumn Header="Seuil" Binding="{Binding SeuilAlerte}" Width="100"/>
+                <DataGridTextColumn Header="Unité" Binding="{Binding Unite}" Width="80"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>
