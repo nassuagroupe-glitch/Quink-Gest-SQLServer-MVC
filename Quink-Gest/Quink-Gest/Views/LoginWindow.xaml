@@ -4,10 +4,6 @@
         Title="QuinkGest — Connexion" Height="720" Width="480"
         WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Background="#2B2B31">
-        <!-- Le fond d'écran couvre exactement la page (même hauteur/largeur que la fenêtre) -->
-        <Image Source="/Assets/LoginBackground.png" Stretch="UniformToFill"
-               HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
-
         <Border Background="#F0FFFFFF" CornerRadius="12" Width="360" Height="420"
                 HorizontalAlignment="Center" VerticalAlignment="Center">
             <Border.Effect>
