@@ -36,8 +36,8 @@ namespace QuinkGest.Models.Database
             CreerBaseSiAbsente();
 
             using var connexion = ObtenirConnexion();
-            using var commande = connexion.CreateCommand();
-            commande.CommandText = @"
+
+            ExecuterScript(connexion, @"
                 IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'Fournisseurs')
                 CREATE TABLE Fournisseurs (
                     Id INT IDENTITY(1,1) PRIMARY KEY,
@@ -142,22 +142,38 @@ namespace QuinkGest.Models.Database
 
                 IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Parametres') AND name = 'LogoChemin')
                 ALTER TABLE Parametres ADD LogoChemin NVARCHAR(500) NULL;
+            ");
 
+            // Chaque ALTER TABLE ADD COLUMN doit être dans un batch séparé de toute
+            // instruction qui utilise la nouvelle colonne (sinon "Invalid column name").
+            ExecuterScript(connexion, @"
                 IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Ventes') AND name = 'MontantPaye')
-                BEGIN
-                    ALTER TABLE Ventes ADD MontantPaye FLOAT NOT NULL DEFAULT 0;
-                    UPDATE Ventes SET MontantPaye = MontantTotal;
-                END
+                ALTER TABLE Ventes ADD MontantPaye FLOAT NOT NULL DEFAULT 0;
+            ");
+            ExecuterScript(connexion, @"
+                UPDATE Ventes SET MontantPaye = MontantTotal
+                WHERE ModePaiement <> 'Crédit' AND MontantPaye <> MontantTotal;
+            ");
 
+            ExecuterScript(connexion, @"
                 IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Ventes') AND name = 'DateDerniereRelance')
                 ALTER TABLE Ventes ADD DateDerniereRelance DATETIME2 NULL;
+            ");
 
+            ExecuterScript(connexion, @"
                 IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Ventes') AND name = 'ClientId')
-                BEGIN
-                    ALTER TABLE Ventes ADD ClientId INT NULL;
-                    ALTER TABLE Ventes ADD CONSTRAINT FK_Ventes_Clients FOREIGN KEY (ClientId) REFERENCES Clients(Id);
-                END
-            ";
+                ALTER TABLE Ventes ADD ClientId INT NULL;
+            ");
+            ExecuterScript(connexion, @"
+                IF NOT EXISTS (SELECT * FROM sys.foreign_keys WHERE name = 'FK_Ventes_Clients')
+                ALTER TABLE Ventes ADD CONSTRAINT FK_Ventes_Clients FOREIGN KEY (ClientId) REFERENCES Clients(Id);
+            ");
+        }
+
+        private static void ExecuterScript(SqlConnection connexion, string script)
+        {
+            using var commande = connexion.CreateCommand();
+            commande.CommandText = script;
             commande.ExecuteNonQuery();
         }
 
