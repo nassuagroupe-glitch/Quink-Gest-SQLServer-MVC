@@ -61,7 +61,7 @@
         <Image Source="/Assets/FondTableauDeBord.jpg" Stretch="UniformToFill"
                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-        <Border Background="#F0FFFFFF" CornerRadius="12" Margin="24" Padding="24">
+        <Border Background="#D9FFFFFF" CornerRadius="12" Margin="16" Padding="24">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="20" ShadowDepth="4" Opacity="0.3"/>
             </Border.Effect>
