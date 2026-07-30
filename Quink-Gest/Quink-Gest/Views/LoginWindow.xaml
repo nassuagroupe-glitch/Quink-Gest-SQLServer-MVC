@@ -15,10 +15,10 @@
                            Margin="0,0,0,24" HorizontalAlignment="Center"/>
 
                 <TextBlock Text="Nom d'utilisateur"/>
-                <TextBox x:Name="ChampNomUtilisateur" Margin="0,4,0,12" Padding="6"/>
+                <TextBox x:Name="ChampNomUtilisateur" Margin="0,4,0,12" Padding="6" Tag="Nom d'utilisateur"/>
 
                 <TextBlock Text="Mot de passe"/>
-                <PasswordBox x:Name="ChampMotDePasse" Margin="0,4,0,12" Padding="6"/>
+                <PasswordBox x:Name="ChampMotDePasse" Margin="0,4,0,12" Padding="6" Tag="Mot de passe"/>
 
                 <CheckBox x:Name="CaseSouvenirMotDePasse" Content="Se souvenir du mot de passe" Margin="0,0,0,16"/>
 
