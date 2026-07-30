@@ -5,7 +5,7 @@
         WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="#A6F0F0F5"/>
+            <Setter Property="Background" Value="#66F0F0F5"/>
             <Setter Property="BorderBrush" Value="#D0D0D8"/>
             <Setter Property="BorderThickness" Value="1"/>
             <Setter Property="Template">
@@ -19,10 +19,10 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="#D9E2E2EC"/>
+                                <Setter Property="Background" Value="#B3E2E2EC"/>
                             </Trigger>
                             <Trigger Property="IsPressed" Value="True">
-                                <Setter Property="Background" Value="#D9D5D5E0"/>
+                                <Setter Property="Background" Value="#B3D5D5E0"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -61,7 +61,7 @@
         <Image Source="/Assets/FondTableauDeBord.jpg" Stretch="UniformToFill"
                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
-        <Border Background="#C2FFFFFF" CornerRadius="12" Margin="16" Padding="24">
+        <Border Background="#80FFFFFF" CornerRadius="12" Margin="16" Padding="24">
             <Border.Effect>
                 <DropShadowEffect BlurRadius="20" ShadowDepth="4" Opacity="0.3"/>
             </Border.Effect>
