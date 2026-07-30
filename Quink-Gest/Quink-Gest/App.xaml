@@ -3,22 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              StartupUri="Views/LoginWindow.xaml">
     <Application.Resources>
-        <!-- Affiche le texte de Tag comme indicatif (placeholder) tant que le champ est vide. -->
+        <!-- Affiche le texte de Tag comme indicatif (placeholder) tant que le champ est vide.
+             Géré en code-behind (et non via un Trigger+Binding dans VisualBrush.Visual, qui ne
+             se résout pas car ce TextBlock n'appartient pas à l'arbre visuel du TextBox). -->
         <Style TargetType="TextBox">
-            <Style.Triggers>
-                <Trigger Property="Text" Value="">
-                    <Setter Property="Background">
-                        <Setter.Value>
-                            <VisualBrush AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                <VisualBrush.Visual>
-                                    <TextBlock Text="{Binding RelativeSource={RelativeSource AncestorType=TextBox}, Path=Tag}"
-                                               Foreground="Gray" FontStyle="Italic" Margin="6,0,0,0"/>
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </Setter.Value>
-                    </Setter>
-                </Trigger>
-            </Style.Triggers>
+            <EventSetter Event="Loaded" Handler="TextBox_ActualiserIndicatif"/>
+            <EventSetter Event="TextChanged" Handler="TextBox_ActualiserIndicatif"/>
         </Style>
 
         <!-- PasswordBox.Password n'étant pas bindable, l'indicatif est géré en code-behind (App.xaml.cs). -->
