@@ -58,7 +58,7 @@
     </Window.Resources>
     <Grid>
         <!-- Le fond d'écran couvre exactement la page (même hauteur/largeur que la fenêtre) -->
-        <Image Source="/Assets/LoginBackground.png" Stretch="UniformToFill"
+        <Image Source="/Assets/FondTableauDeBord.jpg" Stretch="UniformToFill"
                HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
 
         <Border Background="#F0FFFFFF" CornerRadius="12" Margin="24" Padding="24">
