@@ -13,6 +13,7 @@ namespace QuinkGest.Views
     {
         private readonly VenteController _controller = new VenteController();
         private readonly ProduitController _produitController = new ProduitController();
+        private readonly ClientController _clientController = new ClientController();
         private readonly Utilisateur _utilisateurConnecte;
 
         public VenteWindow(Utilisateur utilisateur)
@@ -20,6 +21,7 @@ namespace QuinkGest.Views
             InitializeComponent();
             _utilisateurConnecte = utilisateur;
             ChampProduit.ItemsSource = _produitController.ChargerTousLesProduits();
+            ChampClient.ItemsSource = _clientController.ChargerTousLesClients();
             RafraichirTotal();
         }
 
@@ -52,8 +54,11 @@ namespace QuinkGest.Views
         {
             var modePaiement = (ChampModePaiement.SelectedItem as ComboBoxItem)?.Content?.ToString() ?? "Espèces";
 
+            var clientSelectionne = ChampClient.SelectedItem as Client;
+            var clientNom = clientSelectionne?.Nom ?? ChampClient.Text;
+
             var (succes, message, venteId) = _controller.ValiderVente(
-                ChampClientNom.Text, modePaiement, _utilisateurConnecte.NomComplet);
+                clientNom, clientSelectionne?.Id, modePaiement, _utilisateurConnecte.NomComplet);
 
             MessageBox.Show(message, succes ? "Succès" : "Erreur",
                 MessageBoxButton.OK, succes ? MessageBoxImage.Information : MessageBoxImage.Warning);

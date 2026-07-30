@@ -1,0 +1,40 @@
+<Window x:Class="QuinkGest.Views.EtablissementWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Établissement" Height="480" Width="520"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <GroupBox Header="Logo de l'établissement" Grid.Row="0" Padding="12" Margin="0,0,0,12">
+            <StackPanel Orientation="Horizontal">
+                <Border Width="100" Height="100" BorderBrush="#D0D0D8" BorderThickness="1" Background="#F0F0F5">
+                    <Image x:Name="ImageLogo" Stretch="Uniform" Margin="4"/>
+                </Border>
+                <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="16,0,0,0">
+                    <Button x:Name="BoutonParcourirLogo" Content="Parcourir..." Padding="8,4"
+                            HorizontalAlignment="Left" Click="BoutonParcourirLogo_Click"/>
+                </StackPanel>
+            </StackPanel>
+        </GroupBox>
+
+        <GroupBox Header="Informations de l'établissement" Grid.Row="1" Padding="12">
+            <StackPanel>
+                <TextBlock Text="Nom du commerce"/>
+                <TextBox x:Name="ChampNomCommerce" Margin="0,4,0,12"/>
+
+                <TextBlock Text="Adresse"/>
+                <TextBox x:Name="ChampAdresse" Margin="0,4,0,12"/>
+
+                <TextBlock Text="Téléphone"/>
+                <TextBox x:Name="ChampTelephone" Margin="0,4,0,12"/>
+
+                <Button x:Name="BoutonEnregistrer" Content="Enregistrer" Padding="10,6"
+                        HorizontalAlignment="Right" Margin="0,12,0,0" Click="BoutonEnregistrer_Click"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</Window>

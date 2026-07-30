@@ -139,6 +139,24 @@ namespace QuinkGest.Models.Database
                 IF NOT EXISTS (SELECT * FROM Parametres WHERE Id = 1)
                 INSERT INTO Parametres (Id, NomCommerce, Adresse, Telephone, Devise)
                 VALUES (1, 'QuinkGest', '', '', 'F');
+
+                IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Parametres') AND name = 'LogoChemin')
+                ALTER TABLE Parametres ADD LogoChemin NVARCHAR(500) NULL;
+
+                IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Ventes') AND name = 'MontantPaye')
+                BEGIN
+                    ALTER TABLE Ventes ADD MontantPaye FLOAT NOT NULL DEFAULT 0;
+                    UPDATE Ventes SET MontantPaye = MontantTotal;
+                END
+
+                IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Ventes') AND name = 'DateDerniereRelance')
+                ALTER TABLE Ventes ADD DateDerniereRelance DATETIME2 NULL;
+
+                IF NOT EXISTS (SELECT * FROM sys.columns WHERE object_id = OBJECT_ID('Ventes') AND name = 'ClientId')
+                BEGIN
+                    ALTER TABLE Ventes ADD ClientId INT NULL;
+                    ALTER TABLE Ventes ADD CONSTRAINT FK_Ventes_Clients FOREIGN KEY (ClientId) REFERENCES Clients(Id);
+                END
             ";
             commande.ExecuteNonQuery();
         }

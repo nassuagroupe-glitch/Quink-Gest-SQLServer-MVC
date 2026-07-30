@@ -13,6 +13,8 @@ namespace QuinkGest.Controllers
 
         public double TotalDuMoisEnCours() => _repository.TotalDuMoisEnCours();
 
+        public List<Depense> HistoriquePeriode(DateTime debut, DateTime fin) => _repository.ListerParPeriode(debut, fin);
+
         public (bool succes, string message) AjouterDepense(Depense depense)
         {
             if (string.IsNullOrWhiteSpace(depense.Description))

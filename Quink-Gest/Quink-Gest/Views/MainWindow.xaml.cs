@@ -31,6 +31,13 @@ namespace QuinkGest.Views
         private void BoutonDepenses_Click(object sender, RoutedEventArgs e) => new DepensesWindow().Show();
         private void BoutonAlertes_Click(object sender, RoutedEventArgs e) => new AlertesStockWindow().Show();
         private void BoutonParametres_Click(object sender, RoutedEventArgs e) => new ParametresWindow(_utilisateurConnecte).Show();
+        private void BoutonEtablissement_Click(object sender, RoutedEventArgs e) => new EtablissementWindow().Show();
+
+        private void BoutonRapportCaisse_Click(object sender, RoutedEventArgs e) => new RapportCaisseWindow().Show();
+
+        private void BoutonCredit_Click(object sender, RoutedEventArgs e) => new CreditWindow().Show();
+
+        private void BoutonRelances_Click(object sender, RoutedEventArgs e) => new RelancesWindow().Show();
 
         private void BoutonDeconnexion_Click(object sender, RoutedEventArgs e)
         {

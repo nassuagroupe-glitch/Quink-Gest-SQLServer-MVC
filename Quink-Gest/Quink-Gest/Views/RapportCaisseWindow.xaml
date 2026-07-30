@@ -1,0 +1,59 @@
+<Window x:Class="QuinkGest.Views.RapportCaisseWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Rapport de caisse" Height="600" Width="920"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <WrapPanel Grid.Row="0" Margin="0,0,0,12">
+            <TextBlock Text="Date : " VerticalAlignment="Center" Margin="0,0,6,0"/>
+            <DatePicker x:Name="SelecteurDate" Width="140" Margin="0,0,12,0"
+                        SelectedDateChanged="SelecteurDate_SelectedDateChanged"/>
+            <Button x:Name="BoutonActualiser" Content="Actualiser" Padding="8,4" Click="BoutonActualiser_Click"/>
+        </WrapPanel>
+
+        <StackPanel Grid.Row="1" Margin="0,0,0,12">
+            <TextBlock x:Name="TexteTotalVentes" FontSize="15" FontWeight="Bold"/>
+            <TextBlock x:Name="TexteTotalDepenses" FontSize="15" FontWeight="Bold" Margin="0,4,0,0"/>
+            <TextBlock x:Name="TexteSoldeNet" FontSize="18" FontWeight="Bold" Margin="0,8,0,0"/>
+            <TextBlock x:Name="TexteParMode" FontSize="13" Margin="0,8,0,0" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="16"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <DockPanel Grid.Column="0">
+                <TextBlock DockPanel.Dock="Top" Text="Ventes" FontWeight="Bold" Margin="0,0,0,6"/>
+                <DataGrid x:Name="GrilleVentes" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Numéro" Binding="{Binding Numero}" Width="130"/>
+                        <DataGridTextColumn Header="Client" Binding="{Binding ClientNom}" Width="*"/>
+                        <DataGridTextColumn Header="Montant" Binding="{Binding MontantTotal}" Width="90"/>
+                        <DataGridTextColumn Header="Mode" Binding="{Binding ModePaiement}" Width="100"/>
+                        <DataGridTextColumn Header="Heure" Binding="{Binding DateVente, StringFormat=HH:mm}" Width="60"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+
+            <DockPanel Grid.Column="2">
+                <TextBlock DockPanel.Dock="Top" Text="Dépenses" FontWeight="Bold" Margin="0,0,0,6"/>
+                <DataGrid x:Name="GrilleDepenses" AutoGenerateColumns="False" IsReadOnly="True">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Description" Binding="{Binding Description}" Width="*"/>
+                        <DataGridTextColumn Header="Catégorie" Binding="{Binding Categorie}" Width="120"/>
+                        <DataGridTextColumn Header="Montant" Binding="{Binding Montant}" Width="90"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </DockPanel>
+        </Grid>
+    </Grid>
+</Window>

@@ -1,0 +1,35 @@
+<Window x:Class="QuinkGest.Views.CreditWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Crédit en cours" Height="560" Width="760"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="TexteTotalCredit" Grid.Row="0" FontSize="16" FontWeight="Bold" Margin="0,0,0,12"/>
+
+        <DataGrid x:Name="GrilleCredits" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionChanged="GrilleCredits_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Numéro" Binding="{Binding Numero}" Width="130"/>
+                <DataGridTextColumn Header="Client" Binding="{Binding ClientNom}" Width="150"/>
+                <DataGridTextColumn Header="Date" Binding="{Binding DateVente, StringFormat=dd/MM/yyyy}" Width="90"/>
+                <DataGridTextColumn Header="Total" Binding="{Binding MontantTotal}" Width="90"/>
+                <DataGridTextColumn Header="Payé" Binding="{Binding MontantPaye}" Width="90"/>
+                <DataGridTextColumn Header="Solde" Binding="{Binding Solde}" Width="90"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <GroupBox Header="Enregistrer un paiement" Grid.Row="2" Padding="8" Margin="0,12,0,0">
+            <WrapPanel>
+                <TextBox x:Name="ChampMontantPaiement" Width="120" Margin="4" Tag="Montant payé"/>
+                <Button x:Name="BoutonEnregistrerPaiement" Content="Enregistrer le paiement" Margin="4" Padding="8,4"
+                        IsEnabled="False" Click="BoutonEnregistrerPaiement_Click"/>
+            </WrapPanel>
+        </GroupBox>
+    </Grid>
+</Window>

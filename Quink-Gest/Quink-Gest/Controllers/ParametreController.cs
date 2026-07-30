@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using QuinkGest.Models;
 using QuinkGest.Models.Repository;
 
@@ -9,6 +10,9 @@ namespace QuinkGest.Controllers
     {
         private readonly ParametreRepository _repository = new ParametreRepository();
         private readonly AuthRepository _authRepository = new AuthRepository();
+
+        private static readonly string DossierLogo =
+            Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "QuinkGest");
 
         public Parametre ChargerParametres() => _repository.Obtenir();
 
@@ -26,6 +30,15 @@ namespace QuinkGest.Controllers
             {
                 return (false, $"Erreur lors de l'enregistrement : {ex.Message}");
             }
+        }
+
+        /// <summary>Copie le fichier logo choisi vers le dossier de données de l'application et renvoie son chemin.</summary>
+        public string CopierLogo(string cheminSourceFichier)
+        {
+            Directory.CreateDirectory(DossierLogo);
+            var cheminDestination = Path.Combine(DossierLogo, "logo" + Path.GetExtension(cheminSourceFichier));
+            File.Copy(cheminSourceFichier, cheminDestination, overwrite: true);
+            return cheminDestination;
         }
 
         public List<Utilisateur> ChargerTousLesUtilisateurs() => _authRepository.ListerTout();

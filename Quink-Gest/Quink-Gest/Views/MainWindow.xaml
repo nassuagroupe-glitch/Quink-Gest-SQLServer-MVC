@@ -14,7 +14,33 @@
                         <Border Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="10">
+                                CornerRadius="18">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Background" Value="#E2E2EC"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter Property="Background" Value="#D5D5E0"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="StyleBoutonEtablissement" TargetType="Button">
+            <Setter Property="Background" Value="#F0F0F5"/>
+            <Setter Property="BorderBrush" Value="#D0D0D8"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="22">
                             <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
@@ -49,7 +75,7 @@
                 <TextBlock x:Name="TexteBienvenue" Grid.Row="0" FontSize="24" FontWeight="Bold" Margin="0,0,0,10"/>
                 <TextBlock x:Name="TexteVenteJour" Grid.Row="1" FontSize="16" Margin="0,0,0,24"/>
 
-                <UniformGrid Grid.Row="2" Columns="3" Rows="3">
+                <UniformGrid Grid.Row="2" Columns="3" Rows="4">
                     <Button Margin="9" Padding="18" Click="BoutonVente_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Assets/IconeVente.png" Width="64" Height="64" Margin="0,0,14,0"/>
@@ -86,6 +112,24 @@
                             <TextBlock Text="Dépenses" FontSize="17" FontWeight="Bold" Foreground="Black" VerticalAlignment="Center" TextWrapping="Wrap"/>
                         </StackPanel>
                     </Button>
+                    <Button Margin="9" Padding="18" Click="BoutonRapportCaisse_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/IconeRapportCaisse.png" Width="64" Height="64" Margin="0,0,14,0"/>
+                            <TextBlock Text="Rapport de caisse" FontSize="17" FontWeight="Bold" Foreground="Black" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="9" Padding="18" Click="BoutonCredit_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/IconeCredit.png" Width="64" Height="64" Margin="0,0,14,0"/>
+                            <TextBlock Text="Crédit en cours" FontSize="17" FontWeight="Bold" Foreground="Black" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Button>
+                    <Button Margin="9" Padding="18" Click="BoutonRelances_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="/Assets/IconeRelances.png" Width="64" Height="64" Margin="0,0,14,0"/>
+                            <TextBlock Text="Relances" FontSize="17" FontWeight="Bold" Foreground="Black" VerticalAlignment="Center" TextWrapping="Wrap"/>
+                        </StackPanel>
+                    </Button>
                     <Button Margin="9" Padding="18" Click="BoutonAlertes_Click">
                         <StackPanel Orientation="Horizontal">
                             <Image Source="/Assets/IconeAlertes.png" Width="64" Height="64" Margin="0,0,14,0"/>
@@ -107,5 +151,15 @@
                 </UniformGrid>
             </Grid>
         </Border>
+
+        <Button x:Name="BoutonEtablissement" Style="{StaticResource StyleBoutonEtablissement}"
+                Width="44" Height="44" HorizontalAlignment="Right" VerticalAlignment="Top"
+                Margin="0,36,36,0" ToolTip="Établissement" Click="BoutonEtablissement_Click">
+            <Viewbox Width="22" Height="22">
+                <Canvas Width="24" Height="24">
+                    <Path Fill="Black" Data="M10,20 V14 H14 V20 H19 V12 H22 L12,3 L2,12 H5 V20 H10 Z"/>
+                </Canvas>
+            </Viewbox>
+        </Button>
     </Grid>
 </Window>

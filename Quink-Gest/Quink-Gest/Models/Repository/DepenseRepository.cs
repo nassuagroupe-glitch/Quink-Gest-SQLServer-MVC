@@ -33,6 +33,30 @@ namespace QuinkGest.Models.Repository
             commande.ExecuteNonQuery();
         }
 
+        public List<Depense> ListerParPeriode(DateTime debut, DateTime fin)
+        {
+            var liste = new List<Depense>();
+            using var connexion = DatabaseHelper.ObtenirConnexion();
+            using var commande = connexion.CreateCommand();
+            commande.CommandText = @"SELECT * FROM Depenses
+                WHERE DateDepense >= @debut AND DateDepense <= @fin ORDER BY DateDepense DESC";
+            commande.Parameters.AddWithValue("@debut", debut);
+            commande.Parameters.AddWithValue("@fin", fin);
+            using var lecteur = commande.ExecuteReader();
+            while (lecteur.Read())
+            {
+                liste.Add(new Depense
+                {
+                    Id = lecteur.GetInt32(lecteur.GetOrdinal("Id")),
+                    Description = lecteur["Description"]?.ToString() ?? "",
+                    Montant = lecteur.GetDouble(lecteur.GetOrdinal("Montant")),
+                    Categorie = lecteur["Categorie"]?.ToString() ?? "",
+                    DateDepense = lecteur.GetDateTime(lecteur.GetOrdinal("DateDepense"))
+                });
+            }
+            return liste;
+        }
+
         public List<Depense> ListerTout()
         {
             var liste = new List<Depense>();

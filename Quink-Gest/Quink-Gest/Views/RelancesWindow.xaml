@@ -1,0 +1,32 @@
+<Window x:Class="QuinkGest.Views.RelancesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Relances - Crédits en cours" Height="560" Width="820"
+        WindowStartupLocation="CenterScreen">
+    <Grid Margin="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock x:Name="TexteResume" Grid.Row="0" FontSize="16" FontWeight="Bold" Margin="0,0,0,12"/>
+
+        <DataGrid x:Name="GrilleRelances" Grid.Row="1" AutoGenerateColumns="False" IsReadOnly="True"
+                  SelectionMode="Single" SelectionChanged="GrilleRelances_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Client" Binding="{Binding Vente.ClientNom}" Width="140"/>
+                <DataGridTextColumn Header="Téléphone" Binding="{Binding Telephone}" Width="110"/>
+                <DataGridTextColumn Header="Numéro" Binding="{Binding Vente.Numero}" Width="120"/>
+                <DataGridTextColumn Header="Date vente" Binding="{Binding Vente.DateVente, StringFormat=dd/MM/yyyy}" Width="90"/>
+                <DataGridTextColumn Header="Jours" Binding="{Binding Vente.JoursDepuisVente}" Width="60"/>
+                <DataGridTextColumn Header="Solde" Binding="{Binding Vente.Solde}" Width="90"/>
+                <DataGridTextColumn Header="Dernière relance" Binding="{Binding DerniereRelanceAffichee}" Width="120"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="BoutonMarquerRelance" Grid.Row="2" Content="Marquer comme relancé aujourd'hui"
+                HorizontalAlignment="Right" Padding="10,6" Margin="0,12,0,0" IsEnabled="False"
+                Click="BoutonMarquerRelance_Click"/>
+    </Grid>
+</Window>

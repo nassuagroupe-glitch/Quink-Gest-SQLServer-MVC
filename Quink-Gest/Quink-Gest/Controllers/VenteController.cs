@@ -45,7 +45,7 @@ namespace QuinkGest.Controllers
         public void ViderPanier() => _panier.Clear();
 
         public (bool succes, string message, int? venteId) ValiderVente(
-            string clientNom, string modePaiement, string vendeurNom)
+            string clientNom, int? clientId, string modePaiement, string vendeurNom)
         {
             if (_panier.Count == 0)
                 return (false, "Le panier est vide", null);
@@ -53,12 +53,14 @@ namespace QuinkGest.Controllers
             var vente = new Vente
             {
                 Numero = "QG-" + DateTime.Now.ToString("yyyyMMddHHmmss"),
+                ClientId = clientId,
                 ClientNom = string.IsNullOrWhiteSpace(clientNom) ? "Client comptoir" : clientNom,
                 ModePaiement = modePaiement,
                 VendeurNom = vendeurNom,
                 Lignes = new List<LigneVente>(_panier)
             };
             vente.MontantTotal = vente.CalculerTotal();
+            vente.MontantPaye = modePaiement == "Crédit" ? 0 : vente.MontantTotal;
 
             try
             {
@@ -100,5 +102,41 @@ namespace QuinkGest.Controllers
         }
 
         public double TotalVenduAujourdhui() => _venteRepository.TotalVenduAujourdhui();
+
+        public List<Vente> HistoriquePeriode(DateTime debut, DateTime fin) => _venteRepository.ListerParPeriode(debut, fin);
+
+        public List<Vente> CreditsEnCours() => _venteRepository.ListerCreditsEnCours();
+
+        public (bool succes, string message) MarquerRelance(int venteId)
+        {
+            try
+            {
+                _venteRepository.MarquerRelance(venteId);
+                return (true, "Relance enregistrée");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Erreur lors de l'enregistrement de la relance : {ex.Message}");
+            }
+        }
+
+        public (bool succes, string message) EnregistrerPaiementCredit(int venteId, double montant, double soldeActuel)
+        {
+            if (montant <= 0)
+                return (false, "Le montant du paiement doit être supérieur à zéro");
+
+            if (montant > soldeActuel + 0.01)
+                return (false, $"Le montant dépasse le solde restant ({soldeActuel:N0} F)");
+
+            try
+            {
+                _venteRepository.EnregistrerPaiement(venteId, montant);
+                return (true, "Paiement enregistré");
+            }
+            catch (Exception ex)
+            {
+                return (false, $"Erreur lors de l'enregistrement du paiement : {ex.Message}");
+            }
+        }
     }
 }

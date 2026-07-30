@@ -32,11 +32,13 @@
             <TextBlock x:Name="TexteTotal" FontSize="18" FontWeight="Bold" Margin="0,0,0,8"/>
 
             <WrapPanel>
-                <TextBox x:Name="ChampClientNom" Width="180" Margin="4" Tag="Nom du client (optionnel)"/>
+                <ComboBox x:Name="ChampClient" Width="180" Margin="4" IsEditable="True" DisplayMemberPath="Nom"
+                          Text="Client comptoir"/>
                 <ComboBox x:Name="ChampModePaiement" Width="140" Margin="4">
                     <ComboBoxItem Content="Espèces" IsSelected="True"/>
                     <ComboBoxItem Content="Mobile Money"/>
                     <ComboBoxItem Content="Chèque"/>
+                    <ComboBoxItem Content="Crédit"/>
                 </ComboBox>
                 <Button x:Name="BoutonValider" Content="Valider la vente" Margin="4" Padding="8,4"
                         Click="BoutonValider_Click"/>
