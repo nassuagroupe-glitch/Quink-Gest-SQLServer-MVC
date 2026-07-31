@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal">
+  <Bundle Name="QuinkGest"
+          Manufacturer="SAM Quincaillerie"
+          Version="1.0.0"
+          UpgradeCode="6a1f2e9b-2f3a-4a3a-9b6a-5e0e6d0c2b41"
+          IconSourceFile="..\publish\Quink-Gest.ico">
+
+    <BootstrapperApplication>
+      <bal:WixStandardBootstrapperApplication Theme="rtfLicense" LicenseFile="License.rtf" />
+    </BootstrapperApplication>
+
+    <Chain>
+      <MsiPackage SourceFile="QuinkGest-Setup.msi" />
+    </Chain>
+  </Bundle>
+</Wix>

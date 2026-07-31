@@ -3,7 +3,9 @@
 [Oo]bj/
 publish/
 installer/*.msi
+installer/*.exe
 installer/*.wixpdb
+.wix/
 
 # Visual Studio / Rider
 .vs/
