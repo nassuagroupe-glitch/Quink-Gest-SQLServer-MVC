@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs">
+  <Package Name="QuinkGest"
+           Manufacturer="SAM Quincaillerie"
+           Version="1.0.0"
+           UpgradeCode="e3994eb8-f2ca-4889-a1f4-263f22f949db"
+           Language="1036"
+           Compressed="yes"
+           Scope="perUser">
+
+    <SummaryInformation Description="Installateur QuinkGest - Gestion de quincaillerie" />
+    <MajorUpgrade DowngradeErrorMessage="Une version plus récente de QuinkGest est déjà installée." />
+    <MediaTemplate EmbedCab="yes" />
+
+    <Icon Id="AppIcon.ico" SourceFile="..\publish\Quink-Gest.ico" />
+    <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
+
+    <StandardDirectory Id="LocalAppDataFolder">
+      <Directory Id="INSTALLFOLDER" Name="QuinkGest">
+        <Component Id="CompMainExe" Guid="*">
+          <File Id="QuinkGestExe" Source="..\publish\Quink-Gest.exe" KeyPath="yes">
+            <Shortcut Id="StartMenuShortcut" Directory="ProgramMenuFolder" Name="QuinkGest"
+                       WorkingDirectory="INSTALLFOLDER" Icon="AppIcon.ico" Advertise="no" />
+            <Shortcut Id="DesktopShortcut" Directory="DesktopFolder" Name="QuinkGest"
+                       WorkingDirectory="INSTALLFOLDER" Icon="AppIcon.ico" Advertise="no" />
+          </File>
+        </Component>
+        <Component Id="CompIco" Guid="*">
+          <File Id="QuinkGestIco" Source="..\publish\Quink-Gest.ico" KeyPath="yes" />
+        </Component>
+        <Component Id="CompD3DCompiler" Guid="*">
+          <File Id="D3DCompiler" Source="..\publish\D3DCompiler_47_cor3.dll" KeyPath="yes" />
+        </Component>
+        <Component Id="CompSqlClientSni" Guid="*">
+          <File Id="SqlClientSni" Source="..\publish\Microsoft.Data.SqlClient.SNI.dll" KeyPath="yes" />
+        </Component>
+        <Component Id="CompPenImc" Guid="*">
+          <File Id="PenImc" Source="..\publish\PenImc_cor3.dll" KeyPath="yes" />
+        </Component>
+        <Component Id="CompPresentationNative" Guid="*">
+          <File Id="PresentationNative" Source="..\publish\PresentationNative_cor3.dll" KeyPath="yes" />
+        </Component>
+        <Component Id="CompWebView2Loader" Guid="*">
+          <File Id="WebView2Loader" Source="..\publish\WebView2Loader.dll" KeyPath="yes" />
+        </Component>
+        <Component Id="CompMsalRuntime" Guid="*">
+          <File Id="MsalRuntime" Source="..\publish\msalruntime.dll" KeyPath="yes" />
+        </Component>
+        <Component Id="CompVcRuntime" Guid="*">
+          <File Id="VcRuntime" Source="..\publish\vcruntime140_cor3.dll" KeyPath="yes" />
+        </Component>
+        <Component Id="CompWpfgfx" Guid="*">
+          <File Id="Wpfgfx" Source="..\publish\wpfgfx_cor3.dll" KeyPath="yes" />
+        </Component>
+      </Directory>
+    </StandardDirectory>
+
+    <StandardDirectory Id="ProgramMenuFolder" />
+    <StandardDirectory Id="DesktopFolder" />
+
+    <Feature Id="MainFeature" Title="QuinkGest" Level="1">
+      <ComponentRef Id="CompMainExe" />
+      <ComponentRef Id="CompIco" />
+      <ComponentRef Id="CompD3DCompiler" />
+      <ComponentRef Id="CompSqlClientSni" />
+      <ComponentRef Id="CompPenImc" />
+      <ComponentRef Id="CompPresentationNative" />
+      <ComponentRef Id="CompWebView2Loader" />
+      <ComponentRef Id="CompMsalRuntime" />
+      <ComponentRef Id="CompVcRuntime" />
+      <ComponentRef Id="CompWpfgfx" />
+    </Feature>
+  </Package>
+</Wix>
